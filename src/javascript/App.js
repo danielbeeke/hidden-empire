@@ -1,36 +1,19 @@
-let map = new mapboxgl.Map({
-  container: 'map',
-  style: '/style.json',
-  hash: true,
-  center: [52.1537, 5.3673],
-  zoom: 11
-});
+import { Map } from './Map.js';
+import { Actions } from './Actions.js';
+import { Score } from './Score.js';
+import EventEmitter from './sprinkhaan/js/EventEmitter.js';
 
-let mapPois = new Map();
+class App extends EventEmitter {
+  constructor () {
+    super();
+    this.modules = {
+      map: new Map(this),
+      score: new Score(this),
+      actions: new Actions(this)
+    };
 
-map.on('render', () => {
-  let pois = map.querySourceFeatures('openmaptiles', {
-    sourceLayer: 'poi',
-    filter: ['in', 'class', 'bakery']
-  })
-    .map(poi => {
-      return {
-        name: poi.properties.name,
-        type: poi.properties.class,
-        id: poi.id
-      }
-    });
-
-  if (pois.length) {
-    console.table(pois)
+    Object.keys(this.modules).forEach(moduleKey => this.modules[moduleKey].init());
   }
-  //
-  // if (pois.length) {
-  //   pois.forEach(poi => {
-  //     if (!mapPois.has('poi-' + poi.id)) {
-  //       mapPois.set('poi-' + poi.id, poi);
-  //       console.log(mapPois)
-  //     }
-  //   });
-  // }
-});
+}
+
+new App();

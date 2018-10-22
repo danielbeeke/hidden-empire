@@ -1,24 +1,6 @@
 $speed: .5s;
-$gray: #797979;
-$gray_light: #a0a0a0;
-$delay-from-active-to-inactive: 1s;
-$delay-from-inactive-to-active: 1s;
-
-
-:root {
-  --hexagon-size: 24px;
-  --player-1: white;
-  --player-highlight-1: green;
-  --player-2: black;
-  --player-highlight-2: blue;
-
-  --bee-color: yellow;
-
-  --speed: .4s;
-  --easing: ease-in-out;
-
-
-  @media only screen and (min-width: 720px) {
-    --hexagon-size: 40px;
-  }
-}
+$blue-navy: #105187;
+$blue-sea: #2C8693;
+$white-greenish: #F0F1D5;
+$yellow: #F19722;
+$red: #C33325;
