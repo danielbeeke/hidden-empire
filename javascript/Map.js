@@ -1,6 +1,6 @@
 export class Map {
   constructor (app) {
-    this.style = '/map/style.json';
+    this.style = 'map/style.json';
     this.app = app;
     this.map = new mapboxgl.Map({
       container: 'map',
