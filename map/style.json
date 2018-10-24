@@ -27,7 +27,7 @@
       "url": "https://free.tilehosting.com/data/v3.json?key=i9gslr0G5loMzaOVjD8f"
     }
   },
-  "sprite": "map/crime",
+  "sprite": "https://danielbeeke.nl/hidden-empire/map/crime",
   "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=i9gslr0G5loMzaOVjD8f",
   "layers": [
     {
