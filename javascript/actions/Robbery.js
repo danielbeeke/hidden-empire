@@ -3,8 +3,8 @@ export class Robbery {
 
   }
 
-  static applies (properties) {
-    return ['shop', 'fast_food', 'restaurant'].includes(properties.class);
+  static validClasses () {
+    return ['shop', 'fast_food', 'restaurant'];
   }
 
   static buttonText (properties) {

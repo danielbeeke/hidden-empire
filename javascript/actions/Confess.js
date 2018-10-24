@@ -3,8 +3,8 @@ export class Confess {
 
   }
 
-  static applies (properties) {
-    return ['place_of_worship'].includes(properties.class);
+  static validClasses () {
+    return ['place_of_worship'];
   }
 
   static buttonText (properties) {
