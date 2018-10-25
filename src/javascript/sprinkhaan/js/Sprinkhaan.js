@@ -73,10 +73,10 @@ class Sprinkhaan extends EventEmitter {
   }
 
   setCss() {
-    this.elements['content'].style.marginTop = this.elements['header.is-not-sticky'].clientHeight + 'px';
     if (this.elements['media']) {
       this.elements['media'].style.width = this.element.clientWidth + 'px';
     }
+    this.elements['content'].style.marginTop = this.elements['header.is-not-sticky'].clientHeight + 'px';
     this.elements['content-wrapper'].style.width = this.element.clientWidth + 'px';
     this.elements['header.is-not-sticky'].style.width = this.element.clientWidth + 'px';
     this.elements['header.is-sticky'].style.width = this.element.clientWidth + 'px';

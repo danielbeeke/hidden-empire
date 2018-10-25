@@ -27,7 +27,7 @@
       "url": "https://free.tilehosting.com/data/v3.json?key=i9gslr0G5loMzaOVjD8f"
     }
   },
-  "sprite": "http://localhost:3000/map-images/osm-liberty",
+  "sprite": "https://danielbeeke.nl/hidden-empire/map/crime",
   "glyphs": "https://free.tilehosting.com/fonts/{fontstack}/{range}.pbf?key=i9gslr0G5loMzaOVjD8f",
   "layers": [
     {
@@ -1862,16 +1862,7 @@
       "minzoom": 16,
       "filter": [
         "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          ">=",
-          "rank",
-          20
-        ]
+        ["in", "class", ""]
       ],
       "layout": {
         "icon-image": "{class}_11",
@@ -1904,21 +1895,7 @@
       "minzoom": 15,
       "filter": [
         "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          ">=",
-          "rank",
-          7
-        ],
-        [
-          "<",
-          "rank",
-          20
-        ]
+        ["in", "class", ""]
       ],
       "layout": {
         "icon-image": "{class}_11",
@@ -1951,21 +1928,7 @@
       "minzoom": 14,
       "filter": [
         "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          ">=",
-          "rank",
-          1
-        ],
-        [
-          "<",
-          "rank",
-          7
-        ]
+        ["in", "class", ""]
       ],
       "layout": {
         "icon-image": "{class}_11",
@@ -1986,45 +1949,6 @@
         "text-color": "rgba(182, 82, 82, 1)",
         "text-halo-blur": 0.5,
         "text-halo-color": "rgba(6, 3, 3, 1)",
-        "text-halo-width": 1
-      }
-    },
-    {
-      "id": "poi_transit",
-      "type": "symbol",
-      "metadata": {},
-      "source": "openmaptiles",
-      "source-layer": "poi",
-      "filter": [
-        "all",
-        [
-          "in",
-          "class",
-          "bus",
-          "rail",
-          "airport"
-        ]
-      ],
-      "layout": {
-        "icon-image": "{class}_11",
-        "text-anchor": "left",
-        "text-field": "{name_en}",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "text-max-width": 9,
-        "text-offset": [
-          0.9,
-          0
-        ],
-        "text-padding": 2,
-        "text-size": 12,
-        "visibility": "visible"
-      },
-      "paint": {
-        "text-color": "rgba(255, 255, 255, 1)",
-        "text-halo-blur": 0.5,
-        "text-halo-color": "rgba(0, 0, 0, 1)",
         "text-halo-width": 1
       }
     },

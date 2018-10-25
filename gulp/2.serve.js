@@ -9,6 +9,7 @@ gulp.task('browsersync', () => {
   global.browserSync.init({
     server: [global.paths.src],
     ghostMode: true,
+    https: true
   });
 
   gulp.watch([global.paths.html, global.paths.js]).on('change', reload);

@@ -3,8 +3,8 @@ export class Shoplifting {
 
   }
 
-  static applies (properties) {
-    return properties.class === 'shop';
+  static validClasses () {
+    return ['shop'];
   }
 
   static buttonText (properties) {

@@ -4,7 +4,7 @@ export class Score {
     this.element.classList.add('score');
     document.body.appendChild(this.element)
     this.score = 0;
-    this.add(1);
+    this.add(0);
   }
 
   init () {}

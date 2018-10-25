@@ -21,7 +21,19 @@ export class Actions {
       });
 
       this.showMenu(features);
-    })
+    });
+  }
+
+  allValidClasses () {
+    let validClasses = [];
+
+    this.getTypes().forEach((ActionType) => {
+      ActionType.validClasses().forEach((validClass) => {
+        validClasses.push(validClass);
+      })
+    });
+
+    return validClasses;
   }
 
   showMenu (features) {
@@ -35,7 +47,7 @@ export class Actions {
 
     features.forEach((feature) => {
       this.getTypes().forEach((ActionType) => {
-        if (ActionType.applies(feature.properties)) {
+        if (ActionType.validClasses().includes(feature.properties.class)) {
           actions.add({
             'text': ActionType.buttonText(feature.properties),
             'action': ActionType,
@@ -65,22 +77,31 @@ export class Actions {
       markup.appendChild(actionItem);
     });
 
-    this.attachSprinkhaanMarkup(features[0].properties.name);
-    document.querySelector('.sprinkhaan-content').appendChild(markup);
-
-    this.app.sprinkhaan = new Sprinkhaan();
-    this.app.sprinkhaan.show(() => {
-      this.app.sprinkhaan.expand();
+    this.getBuildingImage(features[0], (imageUrl) => {
+      this.attachSprinkhaanMarkup(features[0].properties.name, imageUrl, () => {
+        document.querySelector('.sprinkhaan-content').appendChild(markup);
+        this.app.sprinkhaan = new Sprinkhaan();
+        this.app.sprinkhaan.show(() => {
+          this.app.sprinkhaan.expand();
+        });
+      });
     });
   }
 
-  attachSprinkhaanMarkup (title) {
-    let output = `
+  attachSprinkhaanMarkup (title, imageUrl, callback) {
+    let img = document.createElement('img');
+    img.src = imageUrl;
+
+    img.addEventListener('load', () => {
+      let output = `
     <div class="sprinkhaan-container" data-state="collapsed" id="sprinkhaan">
         <div class="sprinkhaan-header is-sticky">${title}</div>
         <div class="sprinkhaan-close-button"></div>
     
         <div class="sprinkhaan-inner">
+        
+            <img class="sprinkhaan-media" src="${imageUrl}" style="height: {img.naturalHeight / 2}px">
+            
             <div class="sprinkhaan-content-wrapper">
                 <div class="sprinkhaan-header is-not-sticky">${title}</div>
                 <div class="sprinkhaan-content"></div>
@@ -88,7 +109,23 @@ export class Actions {
         </div>
     </div>`;
 
-    document.body.insertAdjacentHTML('beforeend', output);
+      document.body.insertAdjacentHTML('beforeend', output);
+
+      callback();
+    });
+  }
+
+  getBuildingImage (feature, callback) {
+    let clientId = 'SlpvSU1FaW5DUHdmcXd5SndhZHhBQToxYzA2OTkzMWZmODk3MTYz';
+    let lat = Number(feature.geometry.coordinates[0]).toFixed(5);
+    let lon = Number(feature.geometry.coordinates[1]).toFixed(5);
+
+    let pointsUrl = `https://a.mapillary.com/v3/images?client_id=${clientId}&closeto=${lat},${lon}&radius=20`;
+
+    fetch(pointsUrl).then(response => response.json()).then(response => {
+      let imageUrl = `https://d1cuyjsrcm0gby.cloudfront.net/${response.features[0].properties.key}/thumb-640.jpg`;
+      callback(imageUrl);
+    });
   }
 
   startAction (action, location) {
